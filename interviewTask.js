@@ -137,7 +137,7 @@ app.get ( "/currenciesticker" , ( req, res ) => {
             .then (( data ) => {
                 if (data.length === 0) {
                     for (let curdata = 0; curdata < tickerdata.length; curdata++) {
-                        var currencytickerdata = tickerdata[curdata]
+                        let currencytickerdata = tickerdata[curdata]
                         // Here I insert data into database table.
                         knex ( "currenciestickerdata" ).insert ({
                             "currency" : currencytickerdata.currency,
@@ -205,7 +205,7 @@ app.get ("/daystables" , ( req, res) => {
             //Here I taking data from database for cheking data is available.
                 if (data.length === 0) {
                     for (let curdata = 0; curdata < daytickerdata.length; curdata++) {
-                        var currencytickerdata = daytickerdata[curdata]
+                        let currencytickerdata = daytickerdata[curdata]
                         // Here I insert data into database tables.
                         if (currencytickerdata.hasOwnProperty("1d")) {
                             knex.schema.hasTable ( "1d" )
