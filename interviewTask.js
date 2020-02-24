@@ -208,7 +208,7 @@ app.get ("/daystables" , ( req, res) => {
                         var currencytickerdata = daytickerdata[curdata]
                         // Here I insert data into database tables.
                         if (currencytickerdata.hasOwnProperty("1d")) {
-                            knex.hasTable ( "1d" )
+                            knex.schema.hasTable ( "1d" )
                             .then (( exists ) => {
                                 if ( exists ) {
                                     knex.select ().from ( "1d")
@@ -218,13 +218,13 @@ app.get ("/daystables" , ( req, res) => {
                                         }
                                     })
                                 }else {
-                                    hasTable ( "1d" );
+                                    dayTable ( "1d" );
                                 }
                             }).catch (( err ) => {
                                 console.log ( err )
                             });
                         };if (currencytickerdata.hasOwnProperty("7d")) {
-                            knex.hasTable ( "7d" )
+                            knex.schema.hasTable ( "7d" )
                             .then (( exists ) => {
                                 if ( exists ) {
                                     knex.select ().from ( "7d")
@@ -240,7 +240,7 @@ app.get ("/daystables" , ( req, res) => {
                                 console.log ( err );
                             });
                         };if (currencytickerdata.hasOwnProperty("30d")) {
-                            knex.hasTable ( "30d" )
+                            knex.schema.hasTable ( "30d" )
                             .then (( exists ) => {
                                 if ( exists ) {
                                     knex.select ().from ( "30d")
@@ -256,7 +256,7 @@ app.get ("/daystables" , ( req, res) => {
                                 console.log ( err );
                             });
                         };if (currencytickerdata.hasOwnProperty("365d")) {
-                            knex.hasTable ( "365d" )
+                            knex.schema.hasTable ( "365d" )
                             .then (( exists ) => {
                                 if ( exists ) {
                                     knex.select ().from ( "365d")
