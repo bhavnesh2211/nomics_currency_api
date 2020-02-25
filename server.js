@@ -9,8 +9,7 @@ app.use ( bodyParser.json() );
 app.use ( bodyParser.urlencoded ({ extended : true }) );
 
 const knex = require ( "./Model/tables")
-const dayTable = require ( "./Model/tables")
-const insertInTable = require ( "./Model/tables")
+
 //Below this I have created a routes.
 var metaData = express.Router ();
 app.use ( "/currencies" , metaData );
