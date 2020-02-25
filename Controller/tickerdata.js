@@ -1,4 +1,4 @@
-module.exports = ( tickerData, knex, axios, CircularJSON, dayTable, insertInTable) => {
+module.exports = ( tickerData, knex, axios, CircularJSON) => {
     tickerData.get ( "/tickerdata" , ( req, res ) => {
         knex.select ().from ( "currenciestickerdata" )
             .then (( data ) => {
@@ -66,6 +66,43 @@ module.exports = ( tickerData, knex, axios, CircularJSON, dayTable, insertInTabl
             console.log ( err );
         });
     });
+    
+    /Here I created a function for creating same column tables.
+    var dayTable = (( tableName ) => {
+    knex.schema.createTable ( tableName , table => {
+        table.string ( "id" )
+        table.string ( "price_change" ),
+        table.string ( "price_change_pct" ),
+        table.string ( "volume" ),
+        table.string ( "volume_change" ),
+        table.string ( "volume_change_pct"),
+        table.string ( "market_cap_change"),
+        table.string ( "market_cap_change_pct")
+    }).then (() => {
+        console.log ( "Table created...." + tableName );
+    }).catch (() => {
+        console.log ( "Table already created...." );
+    });
+    });
+
+    //Here I created a function for insert into database for same column\row tables.
+    var insertInTable = (( tableName, tableData , id ) => {
+    knex.schema.hasTable ( tableName )
+    .then (( exists ) => { 
+        if ( exists ) {
+            tableData.id = id
+            knex ( tableName ).insert ( tableData )
+            .   then (( data ) => {
+                console.log ( "Inserted into " + tableName );
+            }).catch (( err ) => {
+                console.log ( err );
+            });
+        }else {
+            dayTable( tableName )
+        }
+    });
+    });
+
      
     //At below endpoint I insterted the days values in the days tables.
     tickerData.get ("/daystables" , ( req, res) => {
