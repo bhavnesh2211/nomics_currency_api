@@ -49,3 +49,5 @@ knex.schema.createTable ( "currenciestickerdata" , table => {
 }).catch (() => {
     console.log ( "Table already created... " );
 });
+
+module.exports = knex
